@@ -4,20 +4,22 @@ services:
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
-    autoDeploy: true
     branch: main
+    autoDeploy: true
     envVars:
-      - key: N8N_BASIC_AUTH_ACTIVE
+      - key: N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS
+        value: "false"
+      - key: N8N_RUNNERS_ENABLED
         value: "true"
+      - key: N8N_BASIC_AUTH_ACTIVE
+        value: "true"        # إذا تريد تفعيل الحماية الأساسية (اختياري)
       - key: N8N_BASIC_AUTH_USER
-        value: "admin"
+        value: "admin"       # اسم المستخدم
       - key: N8N_BASIC_AUTH_PASSWORD
-        value: "yourpassword123"
-      - key: WEBHOOK_URL
-        value: https://n8n-yourname.onrender.com
+        value: "yourpassword" # كلمة المرور
       - key: N8N_HOST
-        value: n8n-yourname.onrender.com
-      - key: N8N_PORT
-        value: "5678"
+        value: "n8n-yourservice.onrender.com"  # غيره إلى رابط خدمتك في Render
       - key: N8N_PROTOCOL
-        value: https
+        value: "https"
+      - key: WEBHOOK_TUNNEL_URL
+        value: "https://n8n-yourservice.onrender.com"  # نفس رابط الخدمة
