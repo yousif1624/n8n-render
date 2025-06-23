@@ -1,19 +1,17 @@
-FROM node:18-alpine
+# نستخدم صورة Node.js خفيفة مبنية على Alpine Linux
+FROM node:20-alpine
 
-# تثبيت n8n بشكل يدوي
-RUN apk add --no-cache \
-    bash \
-    curl \
-    openssl \
-    python3 \
-    py3-pip \
-    && npm install -g n8n
+# تثبيت بعض الأدوات الضرورية
+RUN apk add --no-cache bash curl openssl python3 py3-pip
 
-# تحديد مجلد العمل
+# تثبيت n8n آخر نسخة مستقرة
+RUN npm install -g n8n
+
+# تحديد مجلد العمل داخل الحاوية
 WORKDIR /data
 
-# تعيين البورت
+# تعيين المنفذ الذي سيعمل عليه n8n
 EXPOSE 5678
 
-# الأمر الذي يُشغّل n8n
+# الأمر الأساسي لتشغيل n8n
 CMD ["n8n"]
